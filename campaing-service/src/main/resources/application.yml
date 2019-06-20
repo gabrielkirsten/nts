@@ -1,9 +1,9 @@
 server:
   port: 8080
-  servlet:
-    context-path: /rest
 
 spring:
+  application:
+    name: campaign-service
   h2:
     console:
       enabled: true
@@ -13,3 +13,8 @@ spring:
     username: sa
     password: admin
     driver-class-name: org.h2.Driver
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
