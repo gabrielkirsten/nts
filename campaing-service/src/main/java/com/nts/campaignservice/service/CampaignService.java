@@ -24,9 +24,19 @@ public class CampaignService {
         return campaignRepository.findAllByEndDateAfter(LocalDateTime.now());
     }
 
-    public Campaign getACampaign(UUID id) {
+    public Campaign getCampaign(UUID id) {
         return campaignRepository.findById(id).orElseThrow(CampaingNotFoundException::new);
     }
 
+    public Campaign addCampaign(Campaign campaign) {
+        return campaignRepository.save(campaign);
+    }
 
+    public void deleteCampaign(UUID id) {
+        campaignRepository.deleteById(id);
+    }
+
+    public Campaign updateCampaign(Campaign campaign) {
+        return campaignRepository.save(campaign);
+    }
 }
