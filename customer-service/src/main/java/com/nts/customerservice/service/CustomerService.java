@@ -1,6 +1,7 @@
 package com.nts.customerservice.service;
 
 import com.nts.customerservice.exception.CustomerNotFoundException;
+import com.nts.customerservice.exception.EmailAlreadyExistsException;
 import com.nts.customerservice.gateway.database.entity.Customer;
 import com.nts.customerservice.gateway.database.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class CustomerService {
     }
 
     public Customer addCustomer(Customer customer) {
+        if(customerRepository.existsByEmail(customer.getEmail()))
+            throw new EmailAlreadyExistsException();
+
         return customerRepository.save(customer);
     }
 
