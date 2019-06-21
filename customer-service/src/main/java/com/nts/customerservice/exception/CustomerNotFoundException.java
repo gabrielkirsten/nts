@@ -1,4 +1,4 @@
 package com.nts.customerservice.exception;
 
-public class CustomerNotFoundException extends NotFoundException {
+public class CustomerNotFoundException extends ResourceNotFoundException {
 }

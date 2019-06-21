@@ -1,4 +1,4 @@
-package com.nts.campaignservice.config.docs;
+package com.nts.customerservice.config.docs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,11 +19,11 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.nts.campaignservice"))
+                .apis(RequestHandlerSelectors.basePackage("com.nts.customerservice"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfo(
-                        "Campaign API",
+                        "Customer API",
                         "",
                         "v0",
                         "",

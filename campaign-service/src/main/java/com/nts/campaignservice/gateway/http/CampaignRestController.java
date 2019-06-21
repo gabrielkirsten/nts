@@ -1,6 +1,6 @@
 package com.nts.campaignservice.gateway.http;
 
-import com.nts.campaignservice.domain.Campaign;
+import com.nts.campaignservice.gateway.database.entity.Campaign;
 import com.nts.campaignservice.service.CampaignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Api(value = "Campaign", description = "REST Api for Campaign", tags = {"Campaign"})
 @RestController
-@RequestMapping("campaign")
+@RequestMapping("campaigns")
 public class CampaignRestController {
 
     private final CampaignService campaignService;

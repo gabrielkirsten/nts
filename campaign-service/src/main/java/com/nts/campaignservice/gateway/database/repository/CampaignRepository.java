@@ -1,6 +1,6 @@
-package com.nts.campaignservice.gateway.repository;
+package com.nts.campaignservice.gateway.database.repository;
 
-import com.nts.campaignservice.domain.Campaign;
+import com.nts.campaignservice.gateway.database.entity.Campaign;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

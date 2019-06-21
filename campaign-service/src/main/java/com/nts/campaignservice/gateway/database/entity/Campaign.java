@@ -1,4 +1,4 @@
-package com.nts.campaignservice.domain;
+package com.nts.campaignservice.gateway.database.entity;
 
 import lombok.Data;
 

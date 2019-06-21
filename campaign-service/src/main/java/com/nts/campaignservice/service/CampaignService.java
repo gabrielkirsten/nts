@@ -1,8 +1,8 @@
 package com.nts.campaignservice.service;
 
-import com.nts.campaignservice.domain.Campaign;
+import com.nts.campaignservice.gateway.database.entity.Campaign;
 import com.nts.campaignservice.exception.CampaingNotFoundException;
-import com.nts.campaignservice.gateway.repository.CampaignRepository;
+import com.nts.campaignservice.gateway.database.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
