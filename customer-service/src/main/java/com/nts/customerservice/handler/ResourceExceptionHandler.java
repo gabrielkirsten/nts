@@ -1,5 +1,6 @@
 package com.nts.customerservice.handler;
 
+import com.nts.customerservice.exception.EmailAlreadyExistsException;
 import com.nts.customerservice.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +17,11 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity handleResourceNotFound() {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity handleEmailAlreadyExistsException(){
+        return ResponseEntity.badRequest().body("Email already exists!");
     }
 
 }
