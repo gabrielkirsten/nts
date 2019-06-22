@@ -1,4 +1,4 @@
-package com.nts.campaignservice.config.ampq;
+package com.nts.customercampaignservice.config.ampq;
 
 
 import lombok.Data;

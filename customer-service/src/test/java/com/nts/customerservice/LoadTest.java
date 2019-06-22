@@ -9,9 +9,9 @@ public class LoadTest extends Simulation {
 
 //    public void run() {
 //
-//        GatlingConfiguration config = GatlingConfiguration.apply()
+//        GatlingConfiguration com.nts.customercampaignservice.config = GatlingConfiguration.apply()
 //
-//        HttpProtocolBuilder config = HttpProtocolBuilder.apply()
+//        HttpProtocolBuilder com.nts.customercampaignservice.config = HttpProtocolBuilder.apply()
 //
 //    }
 

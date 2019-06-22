@@ -1,19 +1,19 @@
 package com.nts.customercampaignservice.gateway.ampq;
 
-import com.nts.customercampaignservice.config.ampq.AmpqConfigurationProperties;
+import com.nts.customercampaignservice.domain.Campaign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.utils.SerializationUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CampaignMessageBroker {
+public class CampaignMessageReceiver {
 
-    private Logger logger = LoggerFactory.getLogger(CampaignMessageBroker.class);
-
-    private final RabbitTemplate rabbitTemplate;
-    private final AmpqConfigurationProperties ampqProperties;
+    private Logger logger = LoggerFactory.getLogger(CampaignMessageReceiver.class);
 
     public enum RoutingKey {
         NEW,
@@ -21,15 +21,33 @@ public class CampaignMessageBroker {
         DELETED
     }
 
-    @Autowired
-    public CampaignMessageBroker(RabbitTemplate rabbitTemplate, AmpqConfigurationProperties ampqProperties) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.ampqProperties = ampqProperties;
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "${ampq.queue}", durable = "false"),
+            exchange = @Exchange(value = "${ampq.exchange}", type = "topic"),
+            key = "NEW"
+    ))
+    public void receiveNewMessage(Campaign campaign) {
+        logger.debug(String.format("New entity received: %s", campaign.toString()));
     }
 
-    public void announcesCampaignChange(Campaign campaign, RoutingKey routingKey){
-        rabbitTemplate.convertAndSend(ampqProperties.getExchange(), routingKey.name(), campaign);
-        logger.debug(String.format("Nem message: %s sent to queue: %s", campaign.toString(), routingKey.name()));
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "${ampq.queue}", durable = "false"),
+            exchange = @Exchange(value = "${ampq.exchange}", type = "topic"),
+            key = "UPDATED"
+    ))
+    public void receiveUpdatedMessage(Campaign campaign) {
+        logger.debug(String.format("Received entity updated: %s", campaign.toString()));
     }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "${ampq.queue}", durable = "false"),
+            exchange = @Exchange(value = "${ampq.exchange}", type = "topic"),
+            key = "DELETED"
+    ))
+    public void receiveMessage(Campaign campaign) {
+        logger.debug(String.format("Received entity deleted: %s", campaign.toString()));
+    }
+
+
 
 }
