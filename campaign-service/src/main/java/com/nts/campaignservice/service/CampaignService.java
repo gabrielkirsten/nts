@@ -3,6 +3,7 @@ package com.nts.campaignservice.service;
 import com.nts.campaignservice.gateway.database.entity.Campaign;
 import com.nts.campaignservice.exception.CampaingNotFoundException;
 import com.nts.campaignservice.gateway.database.repository.CampaignRepository;
+import com.nts.campaignservice.gateway.messageBroker.CampaignMessageBroker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,12 @@ import java.util.UUID;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final CampaignMessageBroker campaignMessageBroker;
 
     @Autowired
-    public CampaignService(CampaignRepository campaignRepository) {
+    public CampaignService(CampaignRepository campaignRepository, CampaignMessageBroker campaignMessageBroker) {
         this.campaignRepository = campaignRepository;
+        this.campaignMessageBroker = campaignMessageBroker;
     }
 
     public List<Campaign> getAllCampaigns() {
@@ -29,14 +32,19 @@ public class CampaignService {
     }
 
     public Campaign addCampaign(Campaign campaign) {
-        return campaignRepository.save(campaign);
+        Campaign newCampaign = campaignRepository.save(campaign);
+        campaignMessageBroker.announcesCampaignChange(newCampaign, CampaignMessageBroker.RoutingKey.NEW);
+        return newCampaign;
     }
 
     public void deleteCampaign(UUID id) {
         campaignRepository.deleteById(id);
+        campaignMessageBroker.announcesCampaignChange(new Campaign(id), CampaignMessageBroker.RoutingKey.DELETED);
     }
 
     public Campaign updateCampaign(Campaign campaign) {
-        return campaignRepository.save(campaign);
+        Campaign updatedCampaign = campaignRepository.save(campaign);
+        campaignMessageBroker.announcesCampaignChange(updatedCampaign, CampaignMessageBroker.RoutingKey.UPDATED);
+        return updatedCampaign;
     }
 }

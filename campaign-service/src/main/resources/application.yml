@@ -13,8 +13,21 @@ spring:
     username: sa
     password: admin
     driver-class-name: org.h2.Driver
+  rabbitmq:
+    host: localhost
+    port: 5672
 
 eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/eureka
+
+ampq:
+  hostname: "localhost"
+  port: 5672
+  exchange: "nts"
+  queue: "campaign"
+
+logging:
+  level:
+    com.nts: DEBUG

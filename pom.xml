@@ -15,6 +15,7 @@
     <module>customer-service</module>
     <module>naming-service</module>
     <module>team-service</module>
+    <module>customer-campaign-service</module>
   </modules>
 
 </project>

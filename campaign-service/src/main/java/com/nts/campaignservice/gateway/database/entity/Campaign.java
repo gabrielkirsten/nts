@@ -1,6 +1,7 @@
 package com.nts.campaignservice.gateway.database.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "CAMPAIGN")
-public class Campaign {
+@NoArgsConstructor
+public class Campaign implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -32,5 +35,9 @@ public class Campaign {
 
     @Column(name = "FAVOURITE_TEAM")
     private UUID favouriteTeam;
+
+    public Campaign(UUID id) {
+        this.id = id;
+    }
 
 }
