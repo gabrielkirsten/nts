@@ -1,0 +1,65 @@
+version: '3'
+services:
+  rabbitmq:
+    image: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  naming:
+    build: ./naming-service
+    ports:
+      - "8761:8761"
+    depends_on:
+      - rabbitmq
+
+  api-gateway:
+    build: ./api-gateway-service
+    ports:
+      - "8765:8765"
+    depends_on:
+      - naming
+    environment:
+      EUREKA_SERVER: http://naming:8761/eureka
+      RABBITMQ_SERVER: rabbitmq
+
+  campaign:
+    build: ./campaign-service
+    ports:
+    - "8080:8080"
+    depends_on:
+      - naming
+    environment:
+      EUREKA_SERVER: http://naming:8761/eureka
+      RABBITMQ_SERVER: rabbitmq
+
+  customer:
+    build: ./customer-service
+    ports:
+    - "8090:8090"
+    depends_on:
+    - naming
+    environment:
+      EUREKA_SERVER: http://naming:8761/eureka
+      RABBITMQ_SERVER: rabbitmq
+
+  team:
+    build: ./team-service
+    ports:
+    - "8100:8100"
+    depends_on:
+    - naming
+    environment:
+      EUREKA_SERVER: http://naming:8761/eureka
+      RABBITMQ_SERVER: rabbitmq
+
+  customer-campaign:
+    build: ./customer-campaign-service
+    ports:
+    - "8110:8110"
+    depends_on:
+    - naming
+    environment:
+      EUREKA_SERVER: http://naming:8761/eureka
+      RABBITMQ_SERVER: rabbitmq
+

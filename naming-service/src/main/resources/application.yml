@@ -1,6 +1,6 @@
 spring:
   application:
-    name: naming-serice
+    name: naming-service
 server:
     port: 8761
 

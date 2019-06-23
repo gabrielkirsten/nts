@@ -11,11 +11,11 @@
  
   <modules>
     <module>api-gateway-service</module>
-    <module>campaignDTO-service</module>
-    <module>customerDTO-service</module>
+    <module>campaign-service</module>
+    <module>customer-service</module>
     <module>naming-service</module>
     <module>team-service</module>
-    <module>customerDTO-campaignDTO-service</module>
+    <module>customer-campaign-service</module>
   </modules>
 
 </project>

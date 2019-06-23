@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nts</groupId>
-	<artifactId>campaignDTO-service</artifactId>
+	<artifactId>campaign-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>campaignDTO-service</name>
+	<name>campaign-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
