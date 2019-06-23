@@ -1,30 +1,14 @@
 package com.nts.customerservice.gateway.client.fallback;
 
 import com.nts.customerservice.gateway.client.CustomerCampaignClient;
-import com.nts.customerservice.gateway.database.entity.Customer;
-import feign.FeignException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import feign.hystrix.FallbackFactory;
+import org.springframework.stereotype.Component;
 
-public class CustomerCampaignClientFallbackFactory implements CustomerCampaignClient {
-
-    private final Throwable cause;
-    private Logger logger = LoggerFactory.getLogger(CustomerCampaignClientFallbackFactory.class);
-
-    public CustomerCampaignClientFallbackFactory(Throwable cause) {
-        this.cause = cause;
-    }
+@Component
+public class CustomerCampaignClientFallbackFactory implements FallbackFactory<CustomerCampaignClient> {
 
     @Override
-    public void associateCampaigns(Customer customer) {
-        logger.error("FAIL TO ASSOCIATE CAMPAIGNS");
-
-        if (cause instanceof FeignException) {
-            logger.error("[CUSTOMER CAMPAIGN SERVICE] HTTP Error " + ((FeignException) cause).status());
-        } else {
-            logger.error("[CUSTOMER CAMPAIGN SERVICE] Unknown error!");
-        }
-
+    public CustomerCampaignClient create(Throwable cause) {
+        return new CustomerCampaignClientFallback(cause);
     }
-
 }

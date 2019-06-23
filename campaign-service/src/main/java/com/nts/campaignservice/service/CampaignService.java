@@ -75,6 +75,6 @@ public class CampaignService {
     }
 
     private List<Campaign> getCampaignsWithPeriodConflict(LocalDate startDate, LocalDate endDate) {
-        return campaignRepository.findAllByStartDateBetweenOrEndDateBetween(startDate, endDate);
+        return campaignRepository.findAllByStartDateBetweenOrEndDateBetween(startDate, endDate, startDate, endDate);
     }
 }

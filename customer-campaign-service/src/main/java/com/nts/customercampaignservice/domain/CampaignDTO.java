@@ -11,6 +11,8 @@ public class CampaignDTO implements Serializable {
 
     private UUID id;
 
+    private String name;
+
     private LocalDate startDate;
 
     private LocalDate endDate;

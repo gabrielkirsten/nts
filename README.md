@@ -42,6 +42,10 @@ $ docker-composer up --build
 ```
 
 
+### Links úteis
+- http://base_url:8765/swagger-ui.html
+ possivelmente a `base_url`*
+
 
 
 

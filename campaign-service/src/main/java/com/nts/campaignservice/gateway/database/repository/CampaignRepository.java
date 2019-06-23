@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, UUID> {
     List<Campaign> findAllByEndDateAfter(LocalDate startDateAfter);
-    List<Campaign> findAllByStartDateBetweenOrEndDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Campaign> findAllByStartDateBetweenOrEndDateBetween(LocalDate startDateOfStartDate, LocalDate endDateOfStartDate, LocalDate startDateOfEndDate, LocalDate endDateOfEndDate);
 }
