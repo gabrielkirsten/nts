@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nts</groupId>
-	<artifactId>customer-service</artifactId>
+	<artifactId>customerDTO-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customer-service</name>
+	<name>customerDTO-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -73,6 +73,11 @@
 			<groupId>io.gatling.highcharts</groupId>
 			<artifactId>gatling-charts-highcharts</artifactId>
 			<version>3.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+			<version>1.4.7.RELEASE</version>
 		</dependency>
 	</dependencies>
 

@@ -26,7 +26,9 @@ ampq:
   hostname: "localhost"
   port: 5672
   exchange: "nts"
-  queue: "campaign"
+  queueNew: "campaign-new"
+  queueUpdated: "campaign-updated"
+  queueDeleted: "campaign-deleted"
 
 logging:
   level:

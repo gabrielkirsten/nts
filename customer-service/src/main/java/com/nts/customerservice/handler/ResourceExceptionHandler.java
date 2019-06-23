@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity handleUnknownException() {
+    public ResponseEntity handleUnknownException(Exception e) {
+        e.printStackTrace();
         return ResponseEntity.badRequest().body("Unknown error !");
     }
 

@@ -37,25 +37,13 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public Queue myQueue() {
-        return new Queue(ampqProperties.getQueue(), false, false, false);
-    }
-
-    @Bean
     public TopicExchange exchange() {
         return new TopicExchange(ampqProperties.getExchange());
     }
 
     @Bean
     public MessageListenerAdapter listenerAdapter(CampaignMessageReceiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
-    }
-
-    @Bean
-    public RabbitTemplate rabbitTemplate() {
-        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
-        return rabbitTemplate;
+        return new MessageListenerAdapter(receiver, producerJackson2MessageConverter());
     }
 
     @Bean
@@ -64,8 +52,7 @@ public class RabbitConfiguration {
                 .modules(new JavaTimeModule())
                 .dateFormat(new StdDateFormat())
                 .build();
-        Jackson2JsonMessageConverter jackson2JsonMessageConverter
-                = new Jackson2JsonMessageConverter(objectMapper);
-        return jackson2JsonMessageConverter;
+        return new Jackson2JsonMessageConverter(objectMapper);
     }
+
 }

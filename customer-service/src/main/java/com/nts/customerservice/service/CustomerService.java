@@ -14,10 +14,12 @@ import java.util.UUID;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerCampainsService customerCampainsService;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerCampainsService customerCampainsService) {
         this.customerRepository = customerRepository;
+        this.customerCampainsService = customerCampainsService;
     }
 
     public List<Customer> getAllCustomers() {
@@ -32,7 +34,11 @@ public class CustomerService {
         if(customerRepository.existsByEmail(customer.getEmail()))
             throw new EmailAlreadyExistsException();
 
-        return customerRepository.save(customer);
+        Customer newCustomer = customerRepository.save(customer);
+
+        customerCampainsService.associateCampaigns(newCustomer);
+
+        return newCustomer;
     }
 
     public void deleteCustomer(UUID id) {

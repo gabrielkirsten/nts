@@ -23,7 +23,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfo(
-                        "Customer Campaign API",
+                        "CustomerDTO CampaignDTO API",
                         "",
                         "v0",
                         "",

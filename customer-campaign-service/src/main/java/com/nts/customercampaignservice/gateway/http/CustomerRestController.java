@@ -1,10 +1,13 @@
 package com.nts.customercampaignservice.gateway.http;
 
+import com.nts.customercampaignservice.domain.CustomerDTO;
 import com.nts.customercampaignservice.gateway.database.entity.CampaignCustomer;
 import com.nts.customercampaignservice.service.CustomerCampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +28,11 @@ public class CustomerRestController {
     @GetMapping("{id}/campaign")
     public List<CampaignCustomer> getCustomerCampaigns(@PathVariable("id") UUID customerId) {
         return customerCampaignService.getCampaignByCustomerId(customerId);
+    }
+
+    @PostMapping
+    public void associateCampaigns(@RequestBody CustomerDTO customerDTO){
+        customerCampaignService.associateCampaigns(customerDTO);
     }
 
 }

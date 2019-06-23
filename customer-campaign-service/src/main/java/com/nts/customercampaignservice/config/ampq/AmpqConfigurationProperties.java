@@ -13,6 +13,8 @@ public class AmpqConfigurationProperties {
     private String hostname;
     private Integer port;
     private String exchange;
-    private String queue;
+    private String queueNew;
+    private String queueUpdated;
+    private String queueDeleted;
 
 }
