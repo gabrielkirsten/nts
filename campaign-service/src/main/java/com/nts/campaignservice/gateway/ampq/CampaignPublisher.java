@@ -4,18 +4,14 @@ import com.nts.campaignservice.config.ampq.AmpqConfigurationProperties;
 import com.nts.campaignservice.gateway.database.entity.Campaign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageDeliveryMode;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.utils.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CampaignMessageBroker {
+public class CampaignPublisher {
 
-    private Logger logger = LoggerFactory.getLogger(CampaignMessageBroker.class);
+    private Logger logger = LoggerFactory.getLogger(CampaignPublisher.class);
 
     private final RabbitTemplate rabbitTemplate;
     private final AmpqConfigurationProperties ampqProperties;
@@ -27,7 +23,7 @@ public class CampaignMessageBroker {
     }
 
     @Autowired
-    public CampaignMessageBroker(RabbitTemplate rabbitTemplate, AmpqConfigurationProperties ampqProperties) {
+    public CampaignPublisher(RabbitTemplate rabbitTemplate, AmpqConfigurationProperties ampqProperties) {
         this.rabbitTemplate = rabbitTemplate;
         this.ampqProperties = ampqProperties;
     }

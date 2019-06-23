@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -28,10 +28,10 @@ public class Campaign implements Serializable {
     private String name;
 
     @Column(name = "START_DATE")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "END_DATE")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name = "FAVOURITE_TEAM")
     private UUID favouriteTeam;
