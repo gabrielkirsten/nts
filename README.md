@@ -42,7 +42,7 @@ $ docker-composer up --build
 ```
 
 ### Tolerância a falhas
-Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](https://github.com/Netflix/Hystrix). Quando o Feign não consegue realizar a conexão com o servidor, o Hystrix trata o erro. 
+Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](https://github.com/Netflix/Hystrix). Quando o [Feign](https://github.com/OpenFeign/feign) não consegue realizar a conexão com o servidor, o Hystrix trata o erro. 
 
 ### Links úteis
 - http://base_url:8765/swagger-ui.html (*possivelmente a `base_url` será localhost*)
