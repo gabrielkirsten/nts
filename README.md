@@ -32,7 +32,8 @@ Execute os goals `clean` e `install` do maven para que seja testado, baixadas as
 $ mvn clean install  
 ```  
   
-#### Deploy Para facilitar o deploy do projeto está preparado para funcionar com o Docker. Cada projeto utiliza um container e os projetos são orquestrados com o [Docker compose](https://docs.docker.com/compose/).  
+#### Deploy 
+Para facilitar o deploy do projeto está preparado para funcionar com o Docker. Cada projeto utiliza um container e os projetos são orquestrados com o [Docker compose](https://docs.docker.com/compose/).  
   
 Utilizando o Docker Composer:  
   
