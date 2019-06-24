@@ -1,6 +1,5 @@
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import scala.concurrent.duration._
 
 class StressTest extends Simulation {
   val httpProtocol = http
@@ -8,35 +7,16 @@ class StressTest extends Simulation {
     .acceptHeader("*/*")
     .userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0")
 
-  val scn = scenario("100 requests")
+  val scn = scenario("100 requests - campaign")
+    .exec(http("Post Campaign")
+      .post("/campaigns")
+      .body(StringBody("""{"name": "Campaign x", "startDate": "2019-06-22T14:05:43.333", "endDate": "2020-06-26T14:05:43.333", "favouriteTeam": "86c63b0c-90c2-4d6d-b4e8-921fba7099e8"}""")).asJson
+    )
+
     .exec(http("Get all campaigns in 1 second")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(2)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(3)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(4)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(5)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(5)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(6)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(7)")
-      .get("/campaign"))
-    .pause(1)
-    .exec(http("Get all campaigns in 1 second(8)")
-      .get("/campaign"))
+      .get("/campaigns"))
     .pause(1)
 
 
-  setUp(scn.inject(atOnceUsers(1000)).protocols(httpProtocol))
+  setUp(scn.inject(atOnceUsers(100)).protocols(httpProtocol))
 }

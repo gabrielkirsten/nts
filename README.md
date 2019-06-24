@@ -19,7 +19,7 @@ Para a comunicação dos eventos dos serviços foi utilizado o Message Queue [Ra
   
 ### Documentação dos serviços
 
-Cada serviço conta com a documentação corresposndente implementada no [Swagger](https://swagger.io/). 
+Cada serviço conta com a documentação correspondente implementada no [Swagger](https://swagger.io/). 
 
 ### Build e Deploy
 
@@ -45,7 +45,19 @@ $ docker-composer up --build
 Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](https://github.com/Netflix/Hystrix). Quando o [Feign](https://github.com/OpenFeign/feign) não consegue realizar a conexão com o servidor, o Hystrix trata o erro. 
 
 ### Links úteis
-- http://base_url:8765/swagger-ui.html (*possivelmente a `base_url` será localhost*)
+- Documentação: http://base_url:8765/service_name/swagger-ui.html (*possivelmente a `base_url` será localhost*)
+    - **customer-service**: http://base_url:8765/customer-service/swagger-ui.html
+    - **customer-campaign-service**: http://base_url:8765/customer-campaign-service/swagger-ui.html
+    - **team-service**: http://base_url:8765/team-service/swagger-ui.html
+    - **campaign-service**: http://base_url:8765/campaign-service/swagger-ui.html
+- Eureka: http://base_url:8761/
+- API Gateway: http://base_url:8765
+
+### Teste de desempenho
+Para o teste de desempenho foi utilizado o [Gatling](https://gatling.io/).
+
+### Banco de dados
+Inicialmente foi utilizado o H2. Porém após os testes de desempenho, testando para 100 conexões simultâneas foi constatado que não é possivel a sua utilização para essa quantidade de acessos. Então o banco de dados foi alterado para o [MongoDB](https://www.mongodb.com/).
 
 
 

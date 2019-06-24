@@ -34,6 +34,7 @@ public class CustomerService {
         if(customerRepository.existsByEmail(customer.getEmail()))
             throw new EmailAlreadyExistsException();
 
+        customer.setId(UUID.randomUUID());
         Customer newCustomer = customerRepository.save(customer);
 
         customerCampainsService.associateCampaigns(newCustomer);

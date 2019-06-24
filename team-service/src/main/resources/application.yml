@@ -4,15 +4,6 @@ server:
 spring:
   application:
     name: team-service
-  h2:
-    console:
-      enabled: true
-      path: /h2
-  datasource:
-    url: jdbc:h2:file:~/team
-    username: sa
-    password: admin
-    driver-class-name: org.h2.Driver
 
 eureka:
   client:

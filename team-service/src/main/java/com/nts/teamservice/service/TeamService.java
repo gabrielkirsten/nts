@@ -28,6 +28,7 @@ public class TeamService {
     }
 
     public Team addTeam(Team team) {
+        team.setId(UUID.randomUUID());
         return teamRepository.save(team);
     }
 

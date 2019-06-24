@@ -1,5 +1,12 @@
 version: '3'
 services:
+
+  mongodb:
+    image: "mongo:3.0.4"
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+
   rabbitmq:
     image: "rabbitmq"
     ports:
@@ -22,6 +29,7 @@ services:
     environment:
       EUREKA_SERVER: http://naming:8761/eureka
       RABBITMQ_SERVER: rabbitmq
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/userregistration
 
   campaign:
     build: ./campaign-service
@@ -32,6 +40,7 @@ services:
     environment:
       EUREKA_SERVER: http://naming:8761/eureka
       RABBITMQ_SERVER: rabbitmq
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/userregistration
 
   customer:
     build: ./customer-service
@@ -42,6 +51,7 @@ services:
     environment:
       EUREKA_SERVER: http://naming:8761/eureka
       RABBITMQ_SERVER: rabbitmq
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/userregistration
 
   team:
     build: ./team-service
@@ -52,6 +62,7 @@ services:
     environment:
       EUREKA_SERVER: http://naming:8761/eureka
       RABBITMQ_SERVER: rabbitmq
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/userregistration
 
   customer-campaign:
     build: ./customer-campaign-service
@@ -62,4 +73,5 @@ services:
     environment:
       EUREKA_SERVER: http://naming:8761/eureka
       RABBITMQ_SERVER: rabbitmq
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/userregistration
 

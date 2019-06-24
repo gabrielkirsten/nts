@@ -38,6 +38,7 @@ public class CampaignService {
         List<Campaign> conflictedCampaigns = getCampaignsWithPeriodConflict(campaign.getStartDate(), campaign.getEndDate());
         campaignUpdateDateRule(campaign, conflictedCampaigns);
 
+        campaign.setId(UUID.randomUUID());
         Campaign newCampaign = campaignRepository.save(campaign);
 
         campaignPublisher.announcesCampaignChange(newCampaign, CampaignPublisher.RoutingKey.NEW);
