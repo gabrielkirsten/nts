@@ -1,6 +1,6 @@
 # NTS  
-  
-## Arquitetura  
+
+## Arquitetura do projeto
 A arquitetura do software foi construido conforme a arquitetura de microsserviços.  
   
 ![Architecture](https://github.com/gabrielkirsten/nts/blob/master/docs-assets/nts-architecture.png?raw=true)  
@@ -10,10 +10,10 @@ Os serviços foram baseados no pattern [Database per Service](https://microservi
 Para a comunicação dos eventos dos serviços foi utilizado o Message Queue [RabbitMQ](https://rabbitmq.com).  
   
 ### Serviços implementados:  
- - **campaign-service**: serviço relacionado as campanhas.  
- - **team-service**: serviço relacionado as times.  
- - **customer-service**: serviço que armazena as campanhas.  
- - **customer-campaign-service**: serviço relacionado as campanhas dos clientes.  
+ - **campaign-service**: serviço relacionado a operações com as campanhas.  
+ - **team-service**: serviço relacionado a operações com os times.  
+ - **customer-service**: serviço relacionado a operações com os clientes.  
+ - **customer-campaign-service**: serviço relacionado a operações com as campanhas dos clientes.  
  - **naming-service**: service discovery [Netflix Eureka](https://github.com/Netflix/eureka).  
  - **api-gateway-service**: api gateway [Netflix Zuul](https://github.com/Netflix/zuul).  
     
@@ -38,11 +38,13 @@ Para facilitar o deploy do projeto está preparado para funcionar com o Docker. 
 Utilizando o Docker Composer:  
   
 ```bash 
-$ docker-composer up --build  
+$ docker-composer up --build -d  
 ```  
+
+O docker já sobe todos os sistemas necessários para o funcionamento, incluindo o banco de dados e o servidor de AMPQ.
   
 ### Tolerância a falhas  
-Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](https://github.com/Netflix/Hystrix). Quando o [Feign](https://github.com/OpenFeign/feign) não consegue realizar a conexão com o servidor, o Hystrix trata o erro.   
+Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](https://github.com/Netflix/Hystrix). Quando o [Feign](https://github.com/OpenFeign/feign) não consegue realizar a conexão com o servidor, o Fallback do Hystrix trata o erro.   
   
 ### Links úteis  
 - Documentação: http://base_url:8765/service_name/swagger-ui.html (*possivelmente a `base_url` será localhost*)  
