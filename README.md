@@ -56,24 +56,29 @@ Para suportar a tolerância a falhas foi utilizado o Circuit Breaker [Hystrix](h
 ### Teste de desempenho  
 Para o teste de desempenho foi utilizado o [Gatling](https://gatling.io/).  Utilizando 100 requests simultaneos, somente foi realizado no endpoint de cadastro e obtenção de campanha (por ser considerado o mais custoso).
   
-	================================================================================  
-	---- Global Information --------------------------------------------------------  
-	> request count                                        200 (OK=200    KO=0     )  
-	> min response time                                   2205 (OK=2205   KO=-     )  
-	> max response time                                  11218 (OK=11218  KO=-     )  
-	> mean response time                                  6600 (OK=6600   KO=-     )  
-	> std deviation                                       2154 (OK=2154   KO=-     )  
-	> response time 50th percentile                       6459 (OK=6459   KO=-     )  
-	> response time 75th percentile                       7954 (OK=7954   KO=-     )  
-	> response time 95th percentile                      10320 (OK=10320  KO=-     )  
-	> response time 99th percentile                      11092 (OK=11092  KO=-     )  
-	> mean requests/sec                                 13.333 (OK=13.333 KO=-     )  
-	---- Response Time Distribution ------------------------------------------------  
-	> t < 800 ms                                             0 (  0%)  
-	> 800 ms < t < 1200 ms                                   0 (  0%)  
-	> t > 1200 ms                                          200 (100%)  
-	> failed                                                 0 (  0%)  
-	================================================================================  
+    ================================================================================
+    ---- Global Information --------------------------------------------------------
+    > request count                                        200 (OK=200    KO=0     )
+    > min response time                                      2 (OK=2      KO=-     )
+    > max response time                                   1395 (OK=1395   KO=-     )
+    > mean response time                                   558 (OK=558    KO=-     )
+    > std deviation                                        554 (OK=554    KO=-     )
+    > response time 50th percentile                        351 (OK=351    KO=-     )
+    > response time 75th percentile                       1152 (OK=1152   KO=-     )
+    > response time 95th percentile                       1283 (OK=1283   KO=-     )
+    > response time 99th percentile                       1381 (OK=1381   KO=-     )
+    > mean requests/sec                                 66.667 (OK=66.667 KO=-     )
+    ---- Response Time Distribution ------------------------------------------------
+    > t < 800 ms                                           116 ( 58%)
+    > 800 ms < t < 1200 ms                                  47 ( 24%)
+    > t > 1200 ms                                           37 ( 19%)
+    > failed                                                 0 (  0%)
+    ================================================================================
+
 
 ### Banco de dados  
 Inicialmente foi utilizado o H2. Porém após os testes de desempenho, testando para 100 conexões simultâneas foi constatado que não é possivel a sua utilização para essa quantidade de acessos. Então o banco de dados foi alterado para o [MongoDB](https://www.mongodb.com/).
+
+
+### Cache
+Em alguns endpoints trechos do código foi implementado o Cache com Spring para que melhore o tempo de resposta. 

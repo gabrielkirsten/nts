@@ -7,6 +7,10 @@ spring:
   rabbitmq:
     host: ${RABBITMQ_SERVER:localhost}
     port: 5672
+  data.mongodb:
+    host: ${RABBITMQ_SERVER:localhost}
+    port: 27017
+    database: campaign
 
 eureka:
   client:

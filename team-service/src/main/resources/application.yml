@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: team-service
+  data.mongodb:
+    host: ${RABBITMQ_SERVER:localhost}
+    port: 27017
+    database: team
 
 eureka:
   client:
