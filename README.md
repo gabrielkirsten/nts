@@ -84,3 +84,9 @@ Inicialmente foi utilizado o H2. Porém após os testes de desempenho, testando 
 
 ### Cache
 Em alguns endpoints trechos do código foi implementado o Cache com Spring para que melhore o tempo de resposta. 
+
+### Testes
+
+#### Unitários
+Foram implementados testes unitários nas regras de negócios referentes ao cadastro de novas campanhas, utilizando o [Mockito](https://site.mockito.org/) para realizar os mocks das classes dependentes. 
+
