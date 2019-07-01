@@ -10,13 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import static com.nts.campaignservice.factory.FakeCampaignFactory.createAFakeCampaign;
+import static com.nts.campaignservice.factory.FakeCampaignFactory.createAFakeCampaignList;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyList;
@@ -69,28 +68,5 @@ public class CampaignRuleImplTest {
         assertTrue(future.get().stream().noneMatch(c -> c.getEndDate().isEqual(campaign.getEndDate())));
     }
 
-    private Campaign createAFakeCampaign() {
-        Campaign campaign = new Campaign();
-
-        campaign.setId(UUID.randomUUID());
-        campaign.setName("Campaing x");
-        campaign.setStartDate(LocalDate.now());
-        campaign.setEndDate(LocalDate.now().plusDays(5L));
-        campaign.setFavouriteTeam(UUID.randomUUID());
-
-        return campaign;
-    }
-
-    private List<Campaign> createAFakeCampaignList() {
-        List<Campaign> campaignList = new ArrayList<>();
-
-        for(long i = 0; i < 5; i++){
-            Campaign campaign = createAFakeCampaign();
-            campaign.setEndDate(LocalDate.now().plusDays(1L + i));
-            campaignList.add(campaign);
-        }
-
-        return campaignList;
-    }
 
 }
