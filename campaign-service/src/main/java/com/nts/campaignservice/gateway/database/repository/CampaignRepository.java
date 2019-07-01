@@ -13,5 +13,5 @@ import java.util.UUID;
 @Repository
 public interface CampaignRepository extends MongoRepository<Campaign, UUID> {
     Page<Campaign> findAllByEndDateAfter(LocalDate startDateAfter, Pageable pageable);
-    List<Campaign> findAllByStartDateBetweenOrEndDateBetween(LocalDate startDateOfStartDate, LocalDate endDateOfStartDate, LocalDate startDateOfEndDate, LocalDate endDateOfEndDate);
+    List<Campaign> findAllByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate endDate, LocalDate startDate);
 }

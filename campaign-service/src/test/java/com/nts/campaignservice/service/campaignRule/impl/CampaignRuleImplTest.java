@@ -41,31 +41,26 @@ public class CampaignRuleImplTest {
     }
 
     @Test
-    public void applyRuleShouldDoNotHaveSameEndDate() throws ExecutionException, InterruptedException {
+    public void applyRuleShouldDoNotHaveSameEndDate() {
         List<Campaign> campaigns = createAFakeCampaignList();
         Campaign campaign = createAFakeCampaign();
 
-        Future<List<Campaign>> future = campaignRule.applyRule(campaign, campaigns);
+        campaignRule.applyRule(campaign, campaigns);
 
-        while(!future.isDone() && !future.isCancelled());
-
-        List<Campaign> campaignsReturned = future.get();
-        assertTrue(campaignsReturned.stream()
-                .noneMatch(c -> campaignsReturned.stream()
+        assertTrue(campaigns.stream()
+                .noneMatch(c -> campaigns.stream()
                         .anyMatch(d -> d.getEndDate().equals(c.getEndDate()) && !d.getId().equals(c.getId())))
         );
     }
 
     @Test
-    public void applyRuleShouldNotHaveACampaignWithTheSameEndDate() throws ExecutionException, InterruptedException {
+    public void applyRuleShouldNotHaveACampaignWithTheSameEndDate() {
         List<Campaign> campaigns = createAFakeCampaignList();
         Campaign campaign = createAFakeCampaign();
 
-        Future<List<Campaign>> future = campaignRule.applyRule(campaign, campaigns);
+        campaignRule.applyRule(campaign, campaigns);
 
-        while(!future.isDone() && !future.isCancelled());
-
-        assertTrue(future.get().stream().noneMatch(c -> c.getEndDate().isEqual(campaign.getEndDate())));
+        assertTrue(campaigns.stream().noneMatch(c -> c.getEndDate().isEqual(campaign.getEndDate())));
     }
 
 

@@ -61,19 +61,19 @@ Para o teste de desempenho foi utilizado o [Gatling](https://gatling.io/).  Util
     ================================================================================
     ---- Global Information --------------------------------------------------------
     > request count                                        200 (OK=200    KO=0     )
-    > min response time                                      2 (OK=2      KO=-     )
-    > max response time                                   1395 (OK=1395   KO=-     )
-    > mean response time                                   558 (OK=558    KO=-     )
-    > std deviation                                        554 (OK=554    KO=-     )
-    > response time 50th percentile                        351 (OK=351    KO=-     )
-    > response time 75th percentile                       1152 (OK=1152   KO=-     )
-    > response time 95th percentile                       1283 (OK=1283   KO=-     )
-    > response time 99th percentile                       1381 (OK=1381   KO=-     )
-    > mean requests/sec                                 66.667 (OK=66.667 KO=-     )
+    > min response time                                      5 (OK=5      KO=-     )
+    > max response time                                  11615 (OK=11615  KO=-     )
+    > mean response time                                  2288 (OK=2288   KO=-     )
+    > std deviation                                       3291 (OK=3291   KO=-     )
+    > response time 50th percentile                        164 (OK=164    KO=-     )
+    > response time 75th percentile                       3731 (OK=3731   KO=-     )
+    > response time 95th percentile                       9700 (OK=9700   KO=-     )
+    > response time 99th percentile                      11214 (OK=11214  KO=-     )
+    > mean requests/sec                                 15.385 (OK=15.385 KO=-     )
     ---- Response Time Distribution ------------------------------------------------
-    > t < 800 ms                                           116 ( 58%)
-    > 800 ms < t < 1200 ms                                  47 ( 24%)
-    > t > 1200 ms                                           37 ( 19%)
+    > t < 800 ms                                           111 ( 56%)
+    > 800 ms < t < 1200 ms                                   8 (  4%)
+    > t > 1200 ms                                           81 ( 41%)
     > failed                                                 0 (  0%)
     ================================================================================
 

@@ -45,7 +45,7 @@ public class CampaignService {
     }
 
     @CachePut(value = "campaign", key = "#campaign.id")
-    public Campaign addCampaign(Campaign campaign) {
+    public synchronized Campaign addCampaign(Campaign campaign) {
         List<Campaign> conflictedCampaigns = getCampaignsWithPeriodConflict(campaign.getStartDate(), campaign.getEndDate());
         campaignRule.applyRule(campaign, conflictedCampaigns);
 
@@ -71,7 +71,7 @@ public class CampaignService {
     }
 
     private List<Campaign> getCampaignsWithPeriodConflict(LocalDate startDate, LocalDate endDate) {
-        return campaignRepository.findAllByStartDateBetweenOrEndDateBetween(startDate, endDate, startDate, endDate);
+        return campaignRepository.findAllByStartDateLessThanEqualAndEndDateGreaterThanEqual(startDate, endDate);
     }
 
 }

@@ -18,8 +18,6 @@ public class CampaignRuleImpl implements CampaignRule {
     private final CampaignRepository campaignRepository;
     private final CampaignPublisher campaignPublisher;
 
-    private CountDownLatch lock = new CountDownLatch(1);
-
     public CampaignRuleImpl(CampaignRepository campaignRepository, CampaignPublisher campaignPublisher) {
         this.campaignRepository = campaignRepository;
         this.campaignPublisher = campaignPublisher;
@@ -33,9 +31,8 @@ public class CampaignRuleImpl implements CampaignRule {
         return conflictedCampaigns.stream().anyMatch(cc -> cc.getEndDate().isEqual(c.getEndDate()) && !cc.getId().equals(c.getId()));
     }
 
-    @Async
     @Override
-    public Future<List<Campaign>> applyRule(Campaign campaign, List<Campaign> conflictedCampaigns) {
+    public List<Campaign> applyRule(Campaign campaign, List<Campaign> conflictedCampaigns) {
         conflictedCampaigns.forEach(c -> {
             c.setEndDate(c.getEndDate().plusDays(1L));
             campaignsShouldNotHaveTheSameEndDateAsTheNewCampaign(campaign, conflictedCampaigns, c);
@@ -44,8 +41,7 @@ public class CampaignRuleImpl implements CampaignRule {
         campaignRepository.saveAll(conflictedCampaigns);
         conflictedCampaigns.forEach(c -> campaignPublisher.announcesCampaignChange(c, CampaignPublisher.RoutingKey.UPDATED));
 
-        lock.countDown();
-        return new AsyncResult<>(conflictedCampaigns);
+        return conflictedCampaigns;
     }
 
     private void campaignsShouldNotHaveTheSameEndDateAsTheNewCampaign(Campaign campaign, List<Campaign> conflictedCampaigns, Campaign c) {
