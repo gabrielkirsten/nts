@@ -90,3 +90,12 @@ Em alguns endpoints trechos do código foi implementado o Cache com Spring para 
 #### Unitários
 Foram implementados testes unitários nas regras de negócios referentes ao cadastro de novas campanhas, utilizando o [Mockito](https://site.mockito.org/) para realizar os mocks das classes dependentes. 
 
+#### Integração
+Os testes de integração foram implementados na API de Campanhas, também utilizando o Mockito para realizar os mocks das classes dependentes.
+
+### Problemas de concorrência
+Foram indentificados problemas de concorrência para acessos simultâneos na API de Campanhas, especificamente o endpoint de cadastro de campanha, o qual conta com uma regra especifica que impede que campanhas terminem no mesmo dia. 
+
+Para solicionar o problema de concorrência, foi utilizado o sistema de Locks de maneira em que o método que aplica a regra seja executada de maneira atômica, através do `syncronized` do Java. 
+
+
