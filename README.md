@@ -38,7 +38,7 @@ Para facilitar o deploy do projeto está preparado para funcionar com o Docker. 
 Utilizando o Docker Composer:  
   
 ```bash 
-$ docker-composer up --build -d  
+$ docker-compose up --build -d  
 ```  
 
 O docker já sobe todos os sistemas necessários para o funcionamento, incluindo o banco de dados e o servidor de AMPQ.
