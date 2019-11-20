@@ -5,7 +5,8 @@ A arquitetura do software foi construido conforme a arquitetura de microsserviç
   
 ![Architecture](https://github.com/gabrielkirsten/nts/blob/master/docs-assets/nts-architecture.png?raw=true)  
   
-Os serviços foram baseados no pattern [Database per Service](https://microservices.io/patterns/data/database-per-service.html). Para resolver o problema de sincronização gerado pelos bancos foi utilizado o pattern [Choreography-based Saga](https://microservices.io/patterns/data/saga.html).  
+Os serviços foram baseados no pattern [Database per Service](https://microservices.io/patterns/data/database-per-service.html). 
+Os serviços atualizam as informações relevantes entre os bancos de dados através de mensagens.  
   
 Para a comunicação dos eventos dos serviços foi utilizado o Message Queue [RabbitMQ](https://rabbitmq.com).  
   
